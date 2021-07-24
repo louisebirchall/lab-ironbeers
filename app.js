@@ -18,6 +18,29 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Add the route handlers here:
 
+// localhost:3000
+app.get('/', (request, response, next) => {
+  response.render('index');
+});
+
+// localhost:3000/beers
+app.get('/beers', (req, res, next) => {
+  punkAPI
+    .getBeers()
+    .then(beersFromApi =>
+      console.log('Beers from the database: ', beersFromApi)
+    )
+    .catch(error => console.log(error));
+});
+/*app.get("/home", (request, response, next) => {
+  response.sendFile(__dirname + "/views/home.html");
+});
+
+// localhost:8080/works
+app.get("/works", (request, response, next) => {
+  response.sendFile(__dirname + "/views/works.html");
+});*/
+
 app.get('/', (req, res) => {
   res.render('index');
 });
