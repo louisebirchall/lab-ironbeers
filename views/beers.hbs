@@ -1,5 +1,8 @@
-{{#each}}
-  {{this beersFromApi}}
+{{#each beers}}
+  {{name}}
+  <img src='{{image_url}}' alt='{{name}}' />
+  {{descriptions}}
+  {{tagline}}
 {{/each}}
 
 <img src='{{message}}' alt='beers' srcset='' />

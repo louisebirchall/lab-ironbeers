@@ -1,3 +1,4 @@
+const { request } = require('express');
 const express = require('express');
 
 const hbs = require('hbs');
@@ -27,10 +28,22 @@ app.get('/', (request, response, next) => {
 app.get('/beers', (req, res, next) => {
   punkAPI
     .getBeers()
-    .then(beersFromApi =>
-      console.log('Beers from the database: ', beersFromApi)
-    )
+    .then(beersFromApi => {
+      console.log('Beers from the database: ', beersFromApi);
+      res.render('beers', { beers: beersFromApi });
+    })
     .catch(error => console.log(error));
+});
+
+app.get('/random-beer', (req, res, next) => {
+  // returns a promise
+  punkAPI
+    .getARandomBeer()
+    .then(beersFromApi => {
+      console.log('random-beer');
+      res.render('beer', beersFromApi);
+    })
+    .catch(err => console.error(err));
 });
 /*app.get("/home", (request, response, next) => {
   response.sendFile(__dirname + "/views/home.html");
